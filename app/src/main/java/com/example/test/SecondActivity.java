@@ -2,7 +2,6 @@ package com.example.test;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -79,6 +78,7 @@ public class SecondActivity extends AppCompatActivity {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //데베 접근은 이렇게 하면 됨. 다른 액티비티에서 똑같이 여러 번 써도 됨.
                 try (MyDatabaseHelper dbHelper = new MyDatabaseHelper(SecondActivity.this);
                         SQLiteDatabase db = dbHelper.getReadableDatabase()) {
                     ContentValues values = new ContentValues();
@@ -87,7 +87,8 @@ public class SecondActivity extends AppCompatActivity {
                     values.put("image_url", photoFile.getAbsolutePath()); //파일 path
                     long rowId = db.insert("clothes", null, values);
                 }
-                Toast.makeText(SecondActivity.this, "ss", Toast.LENGTH_LONG).show();
+                Toast.makeText(SecondActivity.this, "저장 완료", Toast.LENGTH_LONG).show();
+                finish();
             }
         });
 
