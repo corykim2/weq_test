@@ -1,5 +1,6 @@
 package com.example.test;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -17,12 +18,14 @@ import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import android.database.sqlite.SQLiteDatabase;
+
 public class SecondActivity extends AppCompatActivity {
     //카메라 관련
     private ActivityResultLauncher<Intent> cameraLauncher;
     private ImageView imageView;
     //드롭다운 메뉴 관련
-    private Spinner spinnerStyle, spinnerType, spinnerCategory;
+    private Spinner spinnerStyle, spinnerType;
     private Button buttonSave;
 
     @Override
@@ -61,21 +64,23 @@ public class SecondActivity extends AppCompatActivity {
         setUpSpinner(spinnerStyle, styleOptions);
         setUpSpinner(spinnerType, typeOptions);
 
-        // 저장 버튼 클릭 이벤트
+        //저장 버튼 (데베 저장) ***********************************************************************
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String selectedStyle = spinnerStyle.getSelectedItem().toString();
-                String selectedType = spinnerType.getSelectedItem().toString();
-
-                String result = "스타일: " + selectedStyle +
-                        "\n유형: " + selectedType;
-
-                Toast.makeText(SecondActivity.this, result, Toast.LENGTH_LONG).show();
+                try (MyDatabaseHelper dbHelper = new MyDatabaseHelper(SecondActivity.this);
+                        SQLiteDatabase db = dbHelper.getReadableDatabase()) {
+                    ContentValues values = new ContentValues();
+                    values.put("style", spinnerStyle.getSelectedItem().toString());
+                    values.put("type", spinnerType.getSelectedItem().toString());
+                    values.put("image_url", "https://example.com/image.jpg");
+                    long rowId = db.insert("clothes", null, values);
+                }
+                Toast.makeText(SecondActivity.this, "ss", Toast.LENGTH_LONG).show();
             }
         });
 
-        //카메라실행 *********************************************************************************
+        //카메라실행
         openCamera();
     }
     // 카메라 실행하는 메서드
