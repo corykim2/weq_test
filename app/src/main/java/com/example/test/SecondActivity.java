@@ -48,7 +48,7 @@ public class SecondActivity extends AppCompatActivity {
         );
         //드롭다운 메뉴 관련 **************************************************************************
 
-        // 스피너 참조
+        // 스피너 참조erer
         spinnerStyle = findViewById(R.id.spinner_style);
         spinnerType = findViewById(R.id.spinner_type);
         buttonSave = findViewById(R.id.button_save);
