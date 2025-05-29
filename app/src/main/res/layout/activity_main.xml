@@ -17,6 +17,14 @@
             android:text="카메라로"
             tools:layout_editor_absoluteX="155dp"
             tools:layout_editor_absoluteY="48dp" />
+
+        <Button
+            android:id="@+id/btnCloset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="카메라로"
+            tools:layout_editor_absoluteX="155dp"
+            tools:layout_editor_absoluteY="48dp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

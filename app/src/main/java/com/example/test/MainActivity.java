@@ -24,11 +24,19 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        Button btnReturn = (Button) findViewById(R.id.btnCamera);
-        btnReturn.setOnClickListener(new View.OnClickListener() {
+        Button btnCamera = (Button) findViewById(R.id.btnCamera);
+        Button btnCloset = (Button) findViewById(R.id.btnCloset);
+        btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),SecondActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnCloset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),ThirdActivity.class);
                 startActivity(intent);
             }
         });
